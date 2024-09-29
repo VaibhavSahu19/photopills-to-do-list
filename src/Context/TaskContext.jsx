@@ -19,7 +19,6 @@ export const TasksProvider = ({ children }) => {
     // Update local storage whenever tasks change
     useEffect(() => {
         localStorage.setItem('tasks', JSON.stringify(tasks));
-        console.log(localStorage.getItem('tasks'));
     }, [tasks]);
 
     const addTask = (task) => {
@@ -30,6 +29,7 @@ export const TasksProvider = ({ children }) => {
         let currentDate = `${day}-${month}-${year}`;
 
         const newTask = {
+            id: task.id,
             title: task.title,
             description: task.description,
             dueDate: task.dueDate,
@@ -42,7 +42,7 @@ export const TasksProvider = ({ children }) => {
 
     const deleteTask = (taskToDelete) => {
         const updatedTasks = tasks.filter(givenTask => {
-            return givenTask.title !== taskToDelete.title;
+            return givenTask.id !== taskToDelete.id;
         });
         setTasks(updatedTasks);
     };
@@ -56,6 +56,7 @@ export const TasksProvider = ({ children }) => {
         <TasksContext.Provider
             value={{
                 tasks,
+                setTasks,
                 addTask,
                 deleteTask,
                 deleteAllTasks

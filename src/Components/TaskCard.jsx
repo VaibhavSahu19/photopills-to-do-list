@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { TasksContext } from '../Context/TaskContext';
+import { Link } from 'react-router-dom';
 
 function TaskCard({ task }) {
     const [isComplete, setIsComplete] = useState(false);
@@ -57,7 +58,7 @@ function TaskCard({ task }) {
         <section 
             className={`flex flex-col md:flex-row p-4 border-2 rounded-lg shadow-md transition-all duration-300 ${getBackgroundColor()}`} 
         >
-            <div className='flex-1 pr-4'>
+            <div className='flex flex-col justify-center flex-1 pr-4'>
                 <h1 className={`text-lg font-semibold ${isComplete ? 'line-through' : ''}`}>Title: {task.title}</h1>
                 <p className={` ${isComplete ? 'line-through' : ''}`}>Description: {task.description}</p>
                 <div className={` ${isComplete ? 'line-through' : ''}`}>Due Date: {task.dueDate}</div>
@@ -77,6 +78,13 @@ function TaskCard({ task }) {
                 >
                     Delete Task
                 </button>
+                <Link 
+                    to='/editTask'
+                    state={{ task }}
+                    className="bg-yellow-400 text-black font-semibold px-4 py-2 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-offset-0 transition duration-200 mt-2 text-center"
+                >
+                    Edit Task
+                </Link>
             </div>
         </section>
     );

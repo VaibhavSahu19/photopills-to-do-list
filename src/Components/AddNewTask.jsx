@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { TasksContext } from '../Context/TaskContext';
+import { v4 as uuidv4 } from 'uuid';
 
 function AddNewTask() {
     const {tasks, addTask} = useContext(TasksContext);
@@ -38,6 +39,7 @@ function AddNewTask() {
         const formattedDueDate = formatDate(dueDate);
 
         const newTask = {
+            id: uuidv4(),
             title: title,
             description: description,
             dueDate: formattedDueDate
