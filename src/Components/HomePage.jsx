@@ -10,6 +10,14 @@ function HomePage() {
         return <TaskCard key={index} task={task} />;
     });
 
+    // Function to handle the delete all tasks action
+    const handleDeleteAllTasks = () => {
+        const confirmDelete = window.confirm("Are you sure you want to delete all tasks?");
+        if (confirmDelete) {
+            deleteAllTasks();
+        }
+    };
+
     return (
         <section className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow-md">
             <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">Your Tasks</h1>
@@ -24,7 +32,7 @@ function HomePage() {
                     Add New Task
                 </Link>
                 <button 
-                    onClick={deleteAllTasks} 
+                    onClick={handleDeleteAllTasks}  // Updated onClick handler
                     className="bg-blue-500 text-white font-semibold px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2"
                 >
                     Delete All Tasks

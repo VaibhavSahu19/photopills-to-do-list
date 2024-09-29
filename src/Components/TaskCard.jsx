@@ -55,7 +55,7 @@ function TaskCard({ task }) {
 
     return (
         <section 
-            className={`flex p-4 border-2 rounded-lg shadow-md transition-all duration-300 ${getBackgroundColor()}`} 
+            className={`flex flex-col md:flex-row p-4 border-2 rounded-lg shadow-md transition-all duration-300 ${getBackgroundColor()}`} 
         >
             <div className='flex-1 pr-4'>
                 <h1 className={`text-lg font-semibold ${isComplete ? 'line-through' : ''}`}>Title: {task.title}</h1>
@@ -64,7 +64,7 @@ function TaskCard({ task }) {
                 <div className={` ${isComplete ? 'line-through' : ''}`}>Created Date: {task.createdDate}</div>
                 <div className={` ${isComplete ? 'line-through' : ''}`}>Updated Date: {task.updatedDate}</div>
             </div>
-            <div className="flex flex-col justify-center ml-4">
+            <div className="flex flex-col justify-center mt-4 md:ml-4">
                 <button 
                     onClick={handleToggleComplete} 
                     className={`font-semibold px-4 py-2 rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${isComplete ? 'bg-gray-400 text-white' : 'bg-green-600 text-white hover:bg-green-700'}`}
