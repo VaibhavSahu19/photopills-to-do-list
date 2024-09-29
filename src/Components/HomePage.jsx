@@ -13,8 +13,8 @@ function HomePage() {
     return (
         <section className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow-md">
             <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">Your Tasks</h1>
-            <div className="flex flex-col space-y-4 mb-6">
-                {tasks.length > 0 ? tasksList : <p className="text-center text-gray-500">No tasks available. Please add a task!</p>}
+            <div className="flex flex-col gap-3 space-y-4 mb-6">
+                {tasks.length > 0 ? tasksList : <p className="text-center text-gray-600">No tasks available. Please add a task!</p>}
             </div>
             <div className="flex justify-between items-center">
                 <Link 

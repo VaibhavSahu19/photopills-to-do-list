@@ -8,7 +8,7 @@ export const TasksProvider = ({ children }) => {
         const date = new Date();
 
         let day = date.getDate();
-        let month = date.getMonth() + 1;
+        let month = (date.getMonth() + 1).toString().padStart(2, '0');
         let year = date.getFullYear();
         let currentDate = `${day}-${month}-${year}`;
         setTasks(tasks => {
