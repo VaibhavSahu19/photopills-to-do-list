@@ -1,15 +1,14 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { TasksContext } from '../Context/TaskContext';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'; //This dependency lets us create a unique ID
 
 function AddNewTask() {
+    //Importing the context api from TaskContext.jsx
     const {tasks, addTask} = useContext(TasksContext);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [dueDate, setDueDate] = useState("");    
-
-    const navigate = useNavigate();
 
     function handleTitleChange(e){
         setTitle(e.target.value);
@@ -23,12 +22,17 @@ function AddNewTask() {
         setDueDate(e.target.value);
     }
 
+    //Converts the given string date in 'yyyy-mm-dd' format
     function formatDate(dateString) {
         const dateParts = dateString.split('-');
         return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
     }
 
 
+    //Using useNavigate() hook allows us to navigate to homepage after the task is added 
+    const navigate = useNavigate();
+
+    //Handles form submission
     function handleSubmit(e) {
         e.preventDefault();
 

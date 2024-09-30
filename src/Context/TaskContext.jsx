@@ -3,9 +3,10 @@ import React, { createContext, useEffect, useState } from 'react';
 export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
+    // Initialize with local storage tasks or empty array
     const [tasks, setTasks] = useState(() => {
         const savedTasks = localStorage.getItem('tasks');
-        return savedTasks ? JSON.parse(savedTasks) : []; // Initialize with local storage tasks or empty array
+        return savedTasks ? JSON.parse(savedTasks) : []; 
     });
 
     // Load tasks from local storage when the component mounts
@@ -47,9 +48,10 @@ export const TasksProvider = ({ children }) => {
         setTasks(updatedTasks);
     };
 
+     // Clear local storage
     const deleteAllTasks = () => {
         setTasks([]);
-        localStorage.removeItem('tasks'); // Clear local storage
+        localStorage.removeItem('tasks');
     };
 
     return (

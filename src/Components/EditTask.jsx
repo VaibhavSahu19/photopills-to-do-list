@@ -38,6 +38,7 @@ const EditTask = () => {
         return `${day}-${month}-${year}`;  
     };
 
+    //Instead of adding a new task, this handle function edits a particular task with a particular unique ID
     function handleSubmit(e) {
         e.preventDefault();
 

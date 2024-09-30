@@ -6,8 +6,9 @@ import { TasksContext } from '../Context/TaskContext';
 function HomePage() {
     const { tasks, deleteAllTasks } = useContext(TasksContext);
 
-    const tasksList = tasks.map((task, index) => {
-        return <TaskCard key={index} task={task} />;
+    //Creates a taskcard for each task present in the tasks array
+    const tasksList = tasks.map((task) => {
+        return <TaskCard key={task.id} task={task} />;
     });
 
     // Function to handle the delete all tasks action
@@ -25,6 +26,7 @@ function HomePage() {
                 {tasks.length > 0 ? tasksList : <p className="text-center text-gray-600">No tasks available. Please add a task!</p>}
             </div>
             <div className="flex justify-between items-center">
+                {/* Link tag lets us route to another url*/ }
                 <Link 
                     to='/addTask' 
                     className="bg-blue-500 text-white font-semibold px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"

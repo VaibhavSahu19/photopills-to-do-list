@@ -24,7 +24,8 @@ function TaskCard({ task }) {
     const getFormattedToday = () => {
         const today = new Date();
         const day = String(today.getDate()).padStart(2, '0');
-        const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        // Adds a leading zero in front of month if it is less than 10
+        const month = String(today.getMonth() + 1).padStart(2, '0'); 
         const year = today.getFullYear();
         return `${day}-${month}-${year}`;
     };
@@ -78,7 +79,7 @@ function TaskCard({ task }) {
             <div className='flex flex-col justify-center flex-1 pr-4'>
                 <h1 className={`text-lg font-semibold ${isComplete ? 'line-through' : ''}`}>Title: {task.title}</h1>
                 <p className={` ${isComplete ? 'line-through' : ''}`}>Description: {task.description}</p>
-                <div className={` ${isComplete ? 'line-through' : ''}`}>Due Date: {formatDateToDDMMYYYY(task.dueDate)}</div> {/* Display dueDate in dd-mm-yyyy */}
+                <div className={` ${isComplete ? 'line-through' : ''}`}>Due Date: {formatDateToDDMMYYYY(task.dueDate)}</div>
                 <div className={` ${isComplete ? 'line-through' : ''}`}>Created Date: {task.createdDate}</div>
                 <div className={` ${isComplete ? 'line-through' : ''}`}>Updated Date: {task.updatedDate}</div>
             </div>

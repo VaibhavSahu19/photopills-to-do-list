@@ -1,4 +1,4 @@
-# Vite To-Do List Application
+# To-Do List Application
 
 This is a simple To-Do List web application built using **React + Vite**, designed to help users create, manage, and track their daily tasks efficiently.
 
@@ -24,7 +24,7 @@ This is a simple To-Do List web application built using **React + Vite**, design
 - **LocalStorage**: For saving tasks data.
 
 ## Live URL
-- https://vaibhav-sahu-to-do-list.vercel.app/
+- **https://vaibhav-sahu-to-do-list.vercel.app/**
 
 ## Installation
 
