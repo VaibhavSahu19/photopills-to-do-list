@@ -1,41 +1,68 @@
-# React Task Management App
+# Vite To-Do List Application
 
-This is a task management application built with React and Vite. It allows users to create, manage, and delete tasks with features like marking tasks as complete and viewing task details.
+This is a simple To-Do List web application built using **Vite**, designed to help users create, manage, and track their daily tasks efficiently.
 
 ## Features
 
-- Add new tasks with title, description, and due date.
-- Mark tasks as complete/incomplete.
-- Delete tasks individually or all at once.
-- Responsive design with a clean user interface.
+- **Add Tasks**: Users can create new tasks with a title, description, due date, and more.
+- **Mark as Complete**: Mark tasks as completed, which visually strikes through the task and updates the status.
+- **Delete Tasks**: Remove tasks from the list with a confirmation.
+- **Edit Tasks**: Modify task details, including the due date.
+- **Due Date Handling**: Background color changes based on the task's due date:
+  - Orange for tasks due today.
+  - Red for overdue tasks.
+  - Green for completed tasks.
+  - Grey for future tasks.
+- **Persistent Storage**: Tasks are saved in the browser's local storage, so they persist across sessions.
 
 ## Technologies Used
 
-- React
-- Vite
-- Tailwind CSS (for styling)
+- **Vite**: For fast and efficient development.
+- **React**: For building the UI components.
+- **Tailwind CSS**: For styling.
+- **React Router**: For handling navigation.
+- **LocalStorage**: For saving tasks data.
 
-## Getting Started
+## Installation
 
-To clone this project and run it on your local machine, follow these steps:
+To get started with this project locally, follow these steps:
 
-### Prerequisites
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/VaibhavSahu19/photopills-to-do-list.git
+    cd photopills-to-do-list
+    ```
 
-Make sure you have the following installed:
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
 
-- [Node.js](https://nodejs.org/en/download/) (v12 or later)
-- [Git](https://git-scm.com/downloads)
+3. Run the development server:
+    ```bash
+    npm run dev
+    ```
 
-### Clone the Repository
+4. Open the application in your browser at:
+    ```
+    http://localhost:3000
+    ```
 
-Open your terminal and run the following command to clone the repository:
+## Scripts
 
-```bash
-git clone https://github.com/your-username/your-repo-name.git
+- **npm run dev**: Runs the development server.
+- **npm run build**: Builds the application for production.
+- **npm run preview**: Previews the built app locally.
 
+## Folder Structure
 
-cd your-repo-name
-
-npm install
-
-npm run dev
+```plaintext
+├── public/            # Static assets
+├── src/
+│   ├── components/    # Reusable components like TaskCard, TaskForm
+│   ├── context/       # Context provider for task management (TaskContext)
+│   ├── pages/         # Application pages (Home, EditTask)
+│   ├── App.jsx        # Main application component
+│   └── main.jsx       # Entry point for the React app
+├── index.html         # Main HTML file
+└── vite.config.js     # Vite configuration
