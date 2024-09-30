@@ -1,23 +1,26 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { TasksContext } from '../Context/TaskContext';
 import { Link } from 'react-router-dom';
 
 function TaskCard({ task }) {
     const [isComplete, setIsComplete] = useState(false);
+    const [bgColor, setBgColor] = useState('bg-white'); // Initialize background color state
     const { deleteTask } = useContext(TasksContext);
 
+    // Toggle task completion status
     function handleToggleComplete() {
         setIsComplete(!isComplete);
     }
 
+    // Delete task with confirmation
     function handleDelete() {
         const confirmDelete = window.confirm("Are you sure you want to delete this task?");
         if (confirmDelete) {
-            deleteTask(task); 
+            deleteTask(task);
         }
     }
 
-    // Function to get today's date in "dd-mm-yyyy" format
+    // Format today's date as "dd-mm-yyyy"
     const getFormattedToday = () => {
         const today = new Date();
         const day = String(today.getDate()).padStart(2, '0');
@@ -26,42 +29,56 @@ function TaskCard({ task }) {
         return `${day}-${month}-${year}`;
     };
 
-    // Determine background color based on task status
-    const getBackgroundColor = () => {
+    // Function to format a date string from "yyyy-mm-dd" to "dd-mm-yyyy"
+    const formatDateToDDMMYYYY = (dateStr) => {
+        const [year, month, day] = dateStr.split('-');
+        return `${day}-${month}-${year}`;
+    };
+
+    // Convert date from "dd-mm-yyyy" to a Date object
+    const parseDateFromDDMMYYYY = (dateStr) => {
+        const [day, month, year] = dateStr.split('-');
+        return new Date(`${year}-${month}-${day}`);
+    };
+
+    // Function to determine background color based on task status and due date
+    const determineBackgroundColor = () => {
         const formattedToday = getFormattedToday();
-        let bgColor = 'bg-white';
+        const formattedDueDate = formatDateToDDMMYYYY(task.dueDate); // Ensure `dueDate` is in dd-mm-yyyy format
+        let newBgColor = 'bg-white';
 
         if (isComplete) {
-            bgColor = 'bg-[#5df392]'; // Completed task color
-        } else if (task.dueDate === formattedToday) {
-            bgColor = 'bg-orange-400 border-orange-500'; // Today's task color
+            newBgColor = 'bg-[#5df392]'; // Completed task color
+        } else if (formattedDueDate === formattedToday) {
+            newBgColor = 'bg-orange-400 border-orange-500'; // Today's task color
         } else {
-            const dueDateParts = task.dueDate.split('-');
-            const dueDate = new Date(`${dueDateParts[2]}-${dueDateParts[1]}-${dueDateParts[0]}`); // Convert to Date object
-            const today = new Date(); // Today's date for comparison
+            const dueDateObj = parseDateFromDDMMYYYY(formattedDueDate);
+            const todayObj = parseDateFromDDMMYYYY(formattedToday);
 
-            // Set the time to midnight to avoid time zone issues
-            today.setHours(0, 0, 0, 0);
-            dueDate.setHours(0, 0, 0, 0);
-            
-            if (dueDate < today) {
-                bgColor = 'bg-red-400 border-red-500'; // Past task color
+            if (dueDateObj < todayObj) {
+                newBgColor = 'bg-red-400 border-red-500'; // Past task color
             } else {
-                bgColor = 'bg-[#616161] text-white border-black'; // Future task color
+                newBgColor = 'bg-[#616161] text-white border-black'; // Future task color
             }
         }
 
-        return bgColor;
+        return newBgColor;
     };
+
+    // useEffect to recalculate the background color when the task or its dueDate changes
+    useEffect(() => {
+        const newBgColor = determineBackgroundColor();
+        setBgColor(newBgColor); // Update the background color state
+    }, [task.dueDate, isComplete]); // Re-run when dueDate or completion status changes
 
     return (
         <section 
-            className={`flex flex-col md:flex-row p-4 border-2 rounded-lg shadow-md transition-all duration-300 ${getBackgroundColor()}`} 
+            className={`flex flex-col md:flex-row p-4 border-2 rounded-lg shadow-md transition-all duration-300 ${bgColor}`} 
         >
             <div className='flex flex-col justify-center flex-1 pr-4'>
                 <h1 className={`text-lg font-semibold ${isComplete ? 'line-through' : ''}`}>Title: {task.title}</h1>
                 <p className={` ${isComplete ? 'line-through' : ''}`}>Description: {task.description}</p>
-                <div className={` ${isComplete ? 'line-through' : ''}`}>Due Date: {task.dueDate}</div>
+                <div className={` ${isComplete ? 'line-through' : ''}`}>Due Date: {formatDateToDDMMYYYY(task.dueDate)}</div> {/* Display dueDate in dd-mm-yyyy */}
                 <div className={` ${isComplete ? 'line-through' : ''}`}>Created Date: {task.createdDate}</div>
                 <div className={` ${isComplete ? 'line-through' : ''}`}>Updated Date: {task.updatedDate}</div>
             </div>
