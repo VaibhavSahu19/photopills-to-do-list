@@ -25,7 +25,7 @@ function AddNewTask() {
     //Converts the given string date in 'yyyy-mm-dd' format
     function formatDate(dateString) {
         const dateParts = dateString.split('-');
-        return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+        return `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`; 
     }
 
 

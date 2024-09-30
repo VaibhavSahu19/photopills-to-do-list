@@ -32,8 +32,8 @@ To get started with this project locally, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/VaibhavSahu19/photopills-to-do-list.git
-    cd photopills-to-do-list
+    git clone https://github.com/VaibhavSahu19/pocketpills-to-do-list.git
+    cd pocketills-to-do-list
     ```
 
 2. Install the dependencies:
